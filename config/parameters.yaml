@@ -1,0 +1,13 @@
+# Status topic from Robot Computer [from ROS Stack]
+status_topic: status
+# Command topic to Robot Computer [from Robot Interface]
+command_topic: command
+
+# Robot Name field
+robot_name_field: robot_name
+# Robot Command field
+robot_command_field: command
+
+
+# Robot Name
+robot_name: iCube
