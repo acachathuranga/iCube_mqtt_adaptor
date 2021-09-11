@@ -7,8 +7,17 @@ class Task:
             execute(String Command)     :       Bool Success, String Msg          
     """
 
-    def getState():
+    class TaskState:
+        Ok = 1
+        Stopped = 2
+        Error = 3
+
+    def getState(self):
+        """ Returns TaskState and Current state data
+        """
         raise NotImplementedError()
 
-    def execute():
+    def execute(self, **kwargs):
+        """ Returns Task State and state data
+        """
         raise NotImplementedError()

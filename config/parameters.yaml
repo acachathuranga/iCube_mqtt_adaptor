@@ -1,3 +1,5 @@
+# MQTT Broker address
+mqtt_broker_address: localhost
 # Status topic from Robot Computer [from ROS Stack]
 status_topic: status
 # Command topic to Robot Computer [from Robot Interface]

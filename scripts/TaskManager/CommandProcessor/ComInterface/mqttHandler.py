@@ -1,5 +1,6 @@
 import paho.mqtt.client as mqtt
 import rospy
+import json
 
 class MqttHandler():
     def __init__(self, name, broker='localhost', port=1883, log=False):
@@ -35,9 +36,16 @@ class MqttHandler():
         self.client.loop_stop()
 
     def subscribe(self, topic, callback):
-        self.callbacks[topic] = callback
+        if not(topic in self.callbacks):
+            self.callbacks[topic] = [callback]
+        else:
+            self.callbacks[topic].append(callback)
 
     def publish(self, topic, msg):
+        # Convert message in case raw dictionary is received
+        if (type(msg) == dict):
+            msg = json.dumps(msg)
+
         self.client.publish(topic, msg)
 
     def on_connect(self, client, userdata, flags, rc):
@@ -57,8 +65,9 @@ class MqttHandler():
             if self.log:
                 rospy.loginfo("%s: [Topic %s]: %s"%(rospy.get_name(), msg.topic, message))
             # Message Callback
-            if not(self.callbacks[msg.topic] is None):
-                self.callbacks[msg.topic](message)
+            for callback in self.callbacks[msg.topic]:
+                if not(callback is None):
+                    callback(message)
 
 
 def printTest(msg):

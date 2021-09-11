@@ -1,0 +1,6 @@
+# I2R MQTT Broker address
+i2r_mqtt_broker_address: 192.168.5.128
+# Command Topic to I2R Server
+i2r_command_topic: robot_depart
+# Command Field to I2R Server
+i2r_command_field: command
