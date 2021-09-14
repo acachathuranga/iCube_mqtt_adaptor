@@ -2,7 +2,7 @@ from ..task import Task
 from ..CommandProcessor.ComInterface.mqttHandler import MqttHandler
 import rospy
 
-class Shutdown():
+class Shutdown:
     def __init__(self, comHandler):
         """ Shutdown Robot Computer
 
@@ -10,11 +10,12 @@ class Shutdown():
         """
         self.comHandler = comHandler
 
-        self.i2r_command_topic = MqttHandler("i2r_command_topic", "robot_depart")
-        self.i2r_command_field = MqttHandler("i2r_command_field", "command")
+        self.i2r_command_topic = rospy.get_param(rospy.get_name() + "i2r_command_topic", "robot_depart")
+        self.i2r_command_field = rospy.get_param(rospy.get_name() + "i2r_command_field", "command")
+        self.i2r_shutdown_command = rospy.get_param(rospy.get_name() + "i2r_shutdown_command", "shutdown")
 
-    def execute(self, **kwargs):
-        msg = {self.i2r_command_field: "shutdown"}
+    def __call__(self, *args):
+        msg = {self.i2r_command_field: self.i2r_shutdown_command}
         self.comHandler.publish(self.i2r_command_topic, msg)
 
 if __name__ == "__main__":

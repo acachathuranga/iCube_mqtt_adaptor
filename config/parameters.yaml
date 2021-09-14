@@ -9,6 +9,8 @@ command_topic: command
 robot_name_field: robot_name
 # Robot Command field
 robot_command_field: command
+# Obstacle Detection Status field
+robot_obstacle_status_field: obstacle_detection
 
 
 # Robot Name

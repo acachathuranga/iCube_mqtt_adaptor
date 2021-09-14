@@ -24,6 +24,7 @@ class MqttHandler():
         self.client.on_connect = self.on_connect
         self.client.on_message = self.msg_callback
 
+        rospy.loginfo("%s: Client %s attempting connection with broker %s"%(rospy.get_name(), self.name, self.broker))
         self.client.connect(broker,port)
         self.client.loop_start()
 

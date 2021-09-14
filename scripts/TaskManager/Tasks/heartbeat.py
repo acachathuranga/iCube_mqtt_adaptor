@@ -3,7 +3,7 @@ from ..CommandProcessor.ComInterface.communicationHandler import CommunicationHa
 import rospy
 import threading
 
-class HeartBeat():
+class HeartBeat:
     def __init__(self,  comInterface, interval=5):
         """ Sends a mqtt heartbeat at a defined interval
 
@@ -25,7 +25,7 @@ class HeartBeat():
         else:
             return Task.TaskState.Ok, "{\"heartbeat_status\":\"ok\"}"        
 
-    def execute(self, **kwargs):
+    def __call__(self, *args):
         empty_msg = {}
         self.communicationHandler.send_message(empty_msg)
     

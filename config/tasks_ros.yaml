@@ -1,0 +1,15 @@
+# Docking control topic
+robot_dock_topic: /dock_indoor_pub
+# Robot Teleop Topic
+robot_teleop_topic: /mobilemanual
+#robot_teleop_topic: /joy1/joy
+# Robot initial pose topic
+robot_initial_pose_topic: /initialpose
+# Robot Obstacle Status topic
+obstacle_status_topic: /collision_avoidance_guard/obstacle_detection
+
+# Initialization
+# Top camera dev name
+top_camera_name: /dev/TopCamera
+# Top camera exposure level
+top_camera_exposure: 150

@@ -2,5 +2,7 @@
   <!-- Launch the Robot Obstacle Map Publisher-->
   <node pkg="robot_mqtt_adaptor" type="main.py" name="robot_display_adaptor" output="screen">
     <rosparam command="load" file="$(find robot_mqtt_adaptor)/config/parameters.yaml"/>
+    <rosparam command="load" file="$(find robot_mqtt_adaptor)/config/tasks_i2r.yaml"/>
+    <rosparam command="load" file="$(find robot_mqtt_adaptor)/config/tasks_ros.yaml"/>
   </node>
 </launch>

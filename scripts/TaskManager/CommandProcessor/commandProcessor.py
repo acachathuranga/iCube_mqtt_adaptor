@@ -44,6 +44,7 @@ class CommandProcessor():
                         command = msg[self.robot_command_field]
                         if (command in self.tasks):
                             # Corresponding task available
+                            rospy.loginfo("%s: CommandProcessor: Command Received [%s]"%(rospy.get_name(),msg))
                             self.tasks[command](msg)
                         else:
                             rospy.logwarn("%s: CommandProcessor: Unknown Command [%s]"%(rospy.get_name(),msg))

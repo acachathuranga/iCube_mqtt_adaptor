@@ -17,7 +17,7 @@ class Task:
         """
         raise NotImplementedError()
 
-    def execute(self, **kwargs):
+    def __call__(self, *args):
         """ Returns Task State and state data
         """
         raise NotImplementedError()
