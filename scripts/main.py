@@ -7,6 +7,7 @@ from TaskManager.Tasks.initialize import Initialize
 from TaskManager.Tasks.gripper_release import GripperRelease
 from TaskManager.Tasks.status_monitor import StatusMonitor
 from TaskManager.Tasks.obstacle_detection import ObstacleDetection
+from TaskManager.Tasks.depth_camera_monitor import DepthCameraMonitor
 from TaskManager.CommandProcessor.commandProcessor import CommandProcessor
 from TaskManager.CommandProcessor.ComInterface.communicationHandler import CommunicationHandler
 from TaskManager.CommandProcessor.ComInterface.mqttHandler import MqttHandler
@@ -29,6 +30,7 @@ class RobotAdaptor():
         dock_and_initialize = Initialize(i2r_mqtt_interface)
         status_monitor = StatusMonitor(comHandler, i2r_mqtt_interface)
         obstacle_detection = ObstacleDetection(comHandler)
+        depth_camera_monitor = DepthCameraMonitor()
 
 
         # Register Tasks
@@ -38,6 +40,7 @@ class RobotAdaptor():
         commandProcessor.register_task("dock", dock_and_initialize)
         commandProcessor.register_task("status_monitor", status_monitor)
         commandProcessor.register_task("obstacle_detect", obstacle_detection)
+        commandProcessor.register_task("depth_camera_monitor", depth_camera_monitor)
 
 
 

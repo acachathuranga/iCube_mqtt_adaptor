@@ -7,6 +7,9 @@ robot_teleop_topic: /mobilemanual
 robot_initial_pose_topic: /initialpose
 # Robot Obstacle Status topic
 obstacle_status_topic: /collision_avoidance_guard/obstacle_detection
+# Depth Camera Topics
+front_depth_cam_point_cloud_topic: /myTopic1
+rear_depth_cam_point_cloud_topic:  /myTopic2
 
 # Initialization
 # Top camera dev name
