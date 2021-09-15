@@ -1,6 +1,7 @@
 import paho.mqtt.client as mqtt
 import rospy
 import json
+import threading
 
 class MqttHandler():
     def __init__(self, name, broker='localhost', port=1883, log=False):
@@ -25,10 +26,26 @@ class MqttHandler():
         self.client.on_message = self.msg_callback
 
         rospy.loginfo("%s: Client %s attempting connection with broker %s"%(rospy.get_name(), self.name, self.broker))
-        self.client.connect(broker,port)
-        self.client.loop_start()
+        # Spawn a thread to handle Mqtt connection. Thread will retry connection upon error.
+        # Unless, an error is generated if broker is not available at connection time.
+        thread = threading.Thread(target=self.start_connection)
+        thread.start()
 
         self.callbacks = {}
+
+    def start_connection(self):
+        rate = rospy.Rate(0.1)
+        connection_success = False
+
+        while (not(rospy.is_shutdown()) and not(connection_success)):
+            try:
+                self.client.connect(self.broker, self.port)
+                self.client.loop_start()
+                connection_success = True
+            except Exception as ex:
+                rospy.logerr("%s: Client %s error connecting to %s. Retrying..."%(rospy.get_name(), self.name, self.broker))
+            rate.sleep()
+
 
     def __del__(self):
         """ Destructor
